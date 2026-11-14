@@ -1,0 +1,161 @@
+{
+ "phase": "main",
+ "horizon": {
+  "default": 3000
+ },
+ "grids": [
+  {
+   "domains": [
+    "maze",
+    "room",
+    "random",
+    "city",
+    "warehouse",
+    "game"
+   ],
+   "mults": [
+    1
+   ],
+   "delays": [
+    "none",
+    "base",
+    "high"
+   ],
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "schedulers": [
+    {
+     "sched": "DEFAULT"
+    },
+    {
+     "sched": "S0"
+    },
+    {
+     "sched": "S1",
+     "lam": 2
+    },
+    {
+     "sched": "S2",
+     "gam": 1
+    },
+    {
+     "sched": "S3",
+     "lam": 2,
+     "gam": 1
+    },
+    {
+     "sched": "ADAPT",
+     "lam": 2,
+     "gam": 1
+    },
+    {
+     "sched": "BANDIT",
+     "lam": 2,
+     "gam": 1
+    }
+   ]
+  },
+  {
+   "domains": [
+    "maze",
+    "room",
+    "random",
+    "city",
+    "warehouse",
+    "game"
+   ],
+   "mults": [
+    1
+   ],
+   "delays": [
+    "base"
+   ],
+   "seeds": [
+    0
+   ],
+   "schedulers": [
+    {
+     "sched": "S0",
+     "env": {
+      "REP": 1
+     }
+    },
+    {
+     "sched": "S0",
+     "env": {
+      "REP": 2
+     }
+    },
+    {
+     "sched": "S0",
+     "env": {
+      "REP": 3
+     }
+    },
+    {
+     "sched": "S0",
+     "env": {
+      "REP": 4
+     }
+    },
+    {
+     "sched": "S0",
+     "env": {
+      "REP": 5
+     }
+    },
+    {
+     "sched": "S3",
+     "lam": 2,
+     "gam": 1,
+     "env": {
+      "REP": 1
+     }
+    },
+    {
+     "sched": "S3",
+     "lam": 2,
+     "gam": 1,
+     "env": {
+      "REP": 2
+     }
+    },
+    {
+     "sched": "S3",
+     "lam": 2,
+     "gam": 1,
+     "env": {
+      "REP": 3
+     }
+    },
+    {
+     "sched": "S3",
+     "lam": 2,
+     "gam": 1,
+     "env": {
+      "REP": 4
+     }
+    },
+    {
+     "sched": "S3",
+     "lam": 2,
+     "gam": 1,
+     "env": {
+      "REP": 5
+     }
+    }
+   ]
+  }
+ ],
+ "note": "lambda*=2 from the S1 sweep, gamma*=1 from the S2 sweep on tuning seeds 100-104 (phase tune)"
+}

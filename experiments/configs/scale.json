@@ -1,0 +1,37 @@
+{
+ "phase": "scale",
+ "horizon": {
+  "default": 1500
+ },
+ "grids": [
+  {
+   "domains": [
+    "iron"
+   ],
+   "mults": [
+    1
+   ],
+   "delays": [
+    "base"
+   ],
+   "seeds": [
+    0,
+    1
+   ],
+   "schedulers": [
+    {
+     "sched": "DEFAULT"
+    },
+    {
+     "sched": "S0"
+    },
+    {
+     "sched": "S3",
+     "lam": 2,
+     "gam": 1
+    }
+   ]
+  }
+ ],
+ "note": "lambda*=2 from the S1 sweep, gamma*=1 from the S2 sweep on tuning seeds 100-104 (phase tune)"
+}

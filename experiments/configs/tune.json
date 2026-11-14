@@ -1,0 +1,119 @@
+{
+ "phase": "tune",
+ "horizon": {
+  "default": 3000
+ },
+ "grids": [
+  {
+   "domains": [
+    "random",
+    "room",
+    "warehouse",
+    "city"
+   ],
+   "mults": [
+    1
+   ],
+   "delays": [
+    "base"
+   ],
+   "seeds": [
+    100,
+    101,
+    102,
+    103,
+    104
+   ],
+   "schedulers": [
+    {
+     "sched": "S0"
+    },
+    {
+     "sched": "S1",
+     "lam": 0.25
+    },
+    {
+     "sched": "S1",
+     "lam": 0.5
+    },
+    {
+     "sched": "S1",
+     "lam": 1
+    },
+    {
+     "sched": "S1",
+     "lam": 2
+    },
+    {
+     "sched": "S1",
+     "lam": 4
+    },
+    {
+     "sched": "S2",
+     "gam": 0.25
+    },
+    {
+     "sched": "S2",
+     "gam": 0.5
+    },
+    {
+     "sched": "S2",
+     "gam": 1
+    },
+    {
+     "sched": "S2",
+     "gam": 2
+    },
+    {
+     "sched": "S2",
+     "gam": 4
+    },
+    {
+     "sched": "S3",
+     "lam": 0.5,
+     "gam": 0.5
+    },
+    {
+     "sched": "S3",
+     "lam": 0.5,
+     "gam": 1
+    },
+    {
+     "sched": "S3",
+     "lam": 0.5,
+     "gam": 2
+    },
+    {
+     "sched": "S3",
+     "lam": 1,
+     "gam": 0.5
+    },
+    {
+     "sched": "S3",
+     "lam": 1,
+     "gam": 1
+    },
+    {
+     "sched": "S3",
+     "lam": 1,
+     "gam": 2
+    },
+    {
+     "sched": "S3",
+     "lam": 2,
+     "gam": 0.5
+    },
+    {
+     "sched": "S3",
+     "lam": 2,
+     "gam": 1
+    },
+    {
+     "sched": "S3",
+     "lam": 2,
+     "gam": 2
+    }
+   ]
+  }
+ ]
+}

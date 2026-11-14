@@ -1,0 +1,19 @@
+# Not distributed: report, paper, data, run results, third-party sources
+report/
+paper/
+index.html
+data/
+results/
+third_party/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+
+# Build outputs
+build/
+
+# macOS
+.DS_Store

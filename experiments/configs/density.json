@@ -1,0 +1,60 @@
+{
+ "phase": "density",
+ "horizon": {
+  "default": 3000
+ },
+ "grids": [
+  {
+   "domains": [
+    "maze",
+    "room",
+    "random",
+    "warehouse"
+   ],
+   "mults": [
+    0.5,
+    1.5,
+    2
+   ],
+   "delays": [
+    "base"
+   ],
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "schedulers": [
+    {
+     "sched": "S0"
+    },
+    {
+     "sched": "S1",
+     "lam": 2
+    },
+    {
+     "sched": "S2",
+     "gam": 1
+    },
+    {
+     "sched": "S3",
+     "lam": 2,
+     "gam": 1
+    },
+    {
+     "sched": "ADAPT",
+     "lam": 2,
+     "gam": 1
+    }
+   ]
+  }
+ ],
+ "note": "lambda*=2 from the S1 sweep, gamma*=1 from the S2 sweep on tuning seeds 100-104 (phase tune)"
+}
