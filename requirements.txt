@@ -1,0 +1,8 @@
+# Running simulations needs only the Python standard library.
+# These are for analysis/figures (analysis/), tests, and Ray cluster sweeps.
+numpy
+pandas
+scipy
+matplotlib
+pytest
+ray

@@ -29,6 +29,8 @@ from lorrsim.world import Simulation
 
 PROJECT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(PROJECT, "data", "instances")
+if not os.path.isdir(DATA):  # fall back to the example instances shipped with the start-kit
+    DATA = os.path.join(PROJECT, "third_party", "Start-Kit", "example_problems")
 SMALL = os.path.join(DATA, "maze.domain", "maze-example_40.json")
 ROOM = os.path.join(DATA, "room.domain", "room-example_150.json")
 

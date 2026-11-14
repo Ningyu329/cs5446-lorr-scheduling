@@ -27,10 +27,14 @@ import argparse
 import json
 import os
 import random
+import threading
 from collections import deque
 
 PROJECT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# official example instances: data/instances if present, else the copy shipped with the start-kit
 BASE = os.path.join(PROJECT, "data", "instances")
+if not os.path.isdir(BASE):
+    BASE = os.path.join(PROJECT, "third_party", "Start-Kit", "example_problems")
 GEN = os.path.join(PROJECT, "data", "generated")
 
 # domain -> official example instance (relative to data/instances)
@@ -150,7 +154,7 @@ def make_instance(domain, mult, delay, seed, out_root=GEN):
             tasks.append(errands)
         for path, body in ((afile, [str(s) for s in starts]),
                            (tfile, [",".join(map(str, t)) for t in tasks])):
-            tmp = path + f".tmp{os.getpid()}"
+            tmp = path + f".tmp{os.getpid()}-{threading.get_ident()}"
             with open(tmp, "w") as f:
                 f.write("# version for LoRR 2026\n%d\n%s\n" % (len(body), "\n".join(body)))
             os.replace(tmp, path)
@@ -180,7 +184,7 @@ def make_instance(domain, mult, delay, seed, out_root=GEN):
     }
     jpath = os.path.join(ddir, instance_name(domain, mult, delay, seed) + ".json")
     if not os.path.exists(jpath):
-        tmp = jpath + f".tmp{os.getpid()}"
+        tmp = jpath + f".tmp{os.getpid()}-{threading.get_ident()}"
         with open(tmp, "w") as f:
             json.dump(out, f, indent=2)
         os.replace(tmp, jpath)
