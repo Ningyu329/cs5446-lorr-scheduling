@@ -1,0 +1,2 @@
+run,completed,cross_window_pct,different_arm_pct,median_task_ticks,median_windows_crossed,arms
+sample_bandit,327,97.55351681957187,83.18042813455658,496,5,30

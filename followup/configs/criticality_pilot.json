@@ -1,0 +1,36 @@
+{
+  "phase": "followup_criticality",
+  "horizon": {
+    "default": 3000
+  },
+  "grids": [
+    {
+      "domains": [
+        "warehouse"
+      ],
+      "mults": [
+        0.5,
+        1.5
+      ],
+      "delays": [
+        "base"
+      ],
+      "seeds": [
+        20,
+        21,
+        22
+      ],
+      "schedulers": [
+        {
+          "sched": "S0"
+        },
+        {
+          "sched": "S3",
+          "lam": 2,
+          "gam": 1
+        }
+      ]
+    }
+  ],
+  "note": "Confirmation uses NEW seeds 20..29, not main 0..9 or tuning 100..104; pilot resumes cleanly in confirm."
+}

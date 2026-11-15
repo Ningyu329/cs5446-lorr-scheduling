@@ -1,0 +1,76 @@
+{
+ "n_runs": 2326,
+ "runs_by_phase": {
+  "main": 1320,
+  "density": 600,
+  "tune": 400,
+  "scale": 6
+ },
+ "schedule_errors_total": 0,
+ "planner_errors_total": 0,
+ "sim_ticks_total": 6969000,
+ "cpu_hours": 349.00848430315654,
+ "overall_DEFAULT": {
+  "mean": -5.879649982303007,
+  "ci95": 1.313064685499507,
+  "p_wilcoxon": 3.1376919955586196e-19,
+  "wins": 22,
+  "losses": 156,
+  "n": 180
+ },
+ "overall_S1": {
+  "mean": 0.4519624129062426,
+  "ci95": 1.2633046915068864,
+  "p_wilcoxon": 0.2568511019717499,
+  "wins": 98,
+  "losses": 77,
+  "n": 180
+ },
+ "overall_S2": {
+  "mean": -0.0645974375513769,
+  "ci95": 1.2490170561362244,
+  "p_wilcoxon": 0.7622763946178671,
+  "wins": 89,
+  "losses": 90,
+  "n": 180
+ },
+ "overall_S3": {
+  "mean": 0.1707740997295864,
+  "ci95": 1.2822834311550266,
+  "p_wilcoxon": 0.7368022814225355,
+  "wins": 83,
+  "losses": 93,
+  "n": 180
+ },
+ "overall_ADAPT": {
+  "mean": -0.40889016666160133,
+  "ci95": 1.14295311512218,
+  "p_wilcoxon": 0.07059476115471486,
+  "wins": 74,
+  "losses": 101,
+  "n": 180
+ },
+ "overall_BANDIT": {
+  "mean": 0.23642568794182708,
+  "ci95": 1.1820751686657307,
+  "p_wilcoxon": 0.8931828788411487,
+  "wins": 88,
+  "losses": 92,
+  "n": 180
+ },
+ "repeat_cv_pct": {
+  "city": 0.68,
+  "game": 1.34,
+  "maze": 10.24,
+  "random": 0.22,
+  "room": 6.27,
+  "warehouse": 0.77
+ },
+ "wait_share": {
+  "room/S0": 0.6359,
+  "room/S3": 0.6352,
+  "warehouse/S0": 0.266,
+  "warehouse/S3": 0.2619
+ },
+ "decoder_obstacle_share_max": 0.0
+}

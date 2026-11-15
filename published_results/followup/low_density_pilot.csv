@@ -1,0 +1,4 @@
+seed,density_multiplier,s0_tasks,s3_tasks,s3_vs_s0_pct,status
+20,0.5,2274,2239,-1.539138,completed
+21,0.5,2219,2184,-1.577287,completed
+22,0.5,2247,2262,0.667557,completed

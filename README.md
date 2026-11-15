@@ -66,6 +66,49 @@ All terms are measured in action steps, so λ and γ are dimensionless.
 
 ---
 
+## Published figures and numerical summaries
+
+The following figures come from the **original 2,326-run study** (six domains, three delay regimes,
+10 held-out seeds per main comparison); they are *not* from the six-run quick-start demo.
+The original complete simulator traces are not stored in GitHub, but selected derived CSVs
+and the original exported PNG figures are in [`published_results/`](published_results/README.md).
+
+**Main ablation — paired throughput changes relative to S0.** The dominant effect is the
+start-kit default's lower throughput; adding C/R and adaptive weights shows no stable pooled improvement.
+
+![Main ablation (original runs)](assets/figures/fig_main_ablation.png)
+
+**Density — exploratory heterogeneity, not a separately confirmed claim.** The warehouse
+S3/S0 gain at 1.5× (approximately +4.45%) did not survive the original familywise
+multiple-comparison correction.
+
+![Density sensitivity (original runs)](assets/figures/fig_density.png)
+
+**Mechanism diagnostics.** The feature-validity and waiting heatmaps explain how congestion
+signals can have limited additional predictive and decision value.
+
+![Residual feature validity (original runs)](assets/figures/fig_feature_validity.png)
+
+![Room waiting heatmap (original runs)](assets/figures/fig_wait_room.png)
+
+Additional figures and source numeric tables: [`assets/figures/`](assets/figures/),
+[`published_results/tables/`](published_results/tables/).
+
+## Exploratory follow-up (15 November 2026)
+
+Three separate post-hoc investigations supplement **but do not replace** the original main results:
+
+| Question | Observed result | Limitation |
+|---|---|---|
+| **A: density criticality** | Original warehouse S3/S0: −0.19% at 0.5×, +4.45% at 1.5×. New 0.5× seeds 20–22: −0.82% mean. | New 1.5× WSL runs were OOM-killed; bootstrap of old seeds is not independent confirmation. |
+| **B: topological alternatives** | 24 new Room passages raised throughput of both S0 and S1; mean S1/S0 interaction −0.69 pp across three seeds. | Does not support a relative S1 benefit, and map distances also changed. |
+| **C: delayed feedback** | Across 180 BANDIT runs, median run-level task completion time 840 ticks vs 100-tick arm windows; 99.28% crossed a window. | Task-completion proxy, not direct per-errand reward credit attribution; no causal claim. |
+
+![BANDIT task-level feedback timescale](assets/figures/fig_followup_bandit_lag.png)
+
+Source, diagnostics, and method constraints: [`docs/followup-results.md`](docs/followup-results.md),
+[`followup/`](followup/), [`published_results/followup/`](published_results/followup/).
+
 ## Requirements
 
 * Linux or macOS, Git, a C++17 compiler, CMake ≥ 3.16, Boost (program_options, system, filesystem, log, log_setup), pybind11
@@ -198,7 +241,10 @@ Each run writes `results/runs/<phase>/<job>/` containing `summary.json` (all met
 | `scripts/quick_summary.py` | dependency-free paired comparison table for a finished phase |
 | `scripts/sanitize_artifacts.py` | strips host names, IPs and absolute paths from run artefacts (`--check` gate) |
 | `experiments/configs/` | the configs listed above |
-| `analysis/` | paired statistics (Wilcoxon, Holm), tables and figures |
+| `analysis/` | paired statistics (Wilcoxon, Holm), tables and figures; standalone plotter for released summary CSVs |
+| `assets/figures/` | published original PNG plots and one follow-up plot |
+| `published_results/` | original derived numeric CSVs and separate A/B/C pilot summaries |
+| `followup/` | independent exploratory diagnostics and pilot scripts |
 | `lorrsim/`, `scripts/run_experiments.py`, `scripts/feature_validity.py`, `tests/test_lorrsim.py` | earlier pure-Python prototype simulator (kept for reference; not used for the reported results) |
 | `tests/test_cda_scheduler.py` | integration tests against the real start-kit binary (pin two bugs found during the study) |
 
@@ -210,7 +256,7 @@ The scheduler is configured through environment variables read by the `lifelong`
 `LORR_SCHED` (`DEFAULT`, `S0`, `S1`, `S2`, `S3`, `ADAPT`, `BANDIT`), `LORR_LAMBDA`, `LORR_GAMMA`, `LORR_K` (shortlist size),
 `LORR_BANDIT_WINDOW`, `LORR_SEED`, `LORR_HORIZON`, `LORR_STATS` (telemetry output path); see `sched/cda_scheduler.cpp`.
 
-The report, paper, generated data and the results of the full study are not included in this repository.
+The report, paper, generated instances and complete per-run simulator results are not included. Selected original derived tables, PNG figures, and separately labeled exploratory follow-up summaries are included in `published_results/` and `assets/figures/`. The original `analysis/make_figures.py` still requires full raw results; `analysis/plot_published_tables.py` works with the released derived tables.
 
 ## Team
 
