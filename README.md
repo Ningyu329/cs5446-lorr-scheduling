@@ -96,7 +96,7 @@ Additional figures and source numeric tables: [`assets/figures/`](assets/figures
 
 ## Exploratory follow-up
 
-Three separate post-hoc investigations supplement **but do not replace** the original main results:
+Three separate post-hoc investigations supplement:
 
 | Question | Observed result | Limitation |
 |---|---|---|
