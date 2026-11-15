@@ -24,7 +24,7 @@ uses the official Start-Kit example problems when `data/instances/` is absent.
 The bottleneck runner accepts either location for the original Room map.
 Published summaries are in `published_results/followup/`; the raw full runs are **not** in this repository.
 
-## C — Offline Bandit diagnosis (start here; no simulation)
+## Offline Bandit diagnosis (start here; no simulation)
 
 Use the bundled, already-checked example from the connected Drive:
 
@@ -43,7 +43,7 @@ python3 followup/study.py audit-bandit --runs results/runs/main
 
 If no runs are found, the Drive results have **not** been synced locally. Do not claim that the full 180-run audit has been done. The bundled sample still works without them.
 
-## A — Density interaction: independent seeds
+## Density interaction: independent seeds
 
 The existing 0.5× and 1.5× density results suggest an exploratory interaction. Do **not** treat those same seeds as an independent confirmation. We use *new* seeds 20–29, with fixed existing weights `(lambda,gamma)=(2,1)`, warehouse domain, base delays, S0 and S3, 3000 ticks.
 
@@ -66,7 +66,7 @@ python3 followup/study.py criticality-report
 
 Primary estimand: within-seed **interaction**, `relative-effect(S3 vs S0 at 1.5×) - relative-effect(S3 vs S0 at 0.5×)`; not simply whether a single condition p-value is below 0.05. If the effect does not replicate, report this accurately.
 
-## B — Alternative-passages controlled pilot
+## Alternative-passages controlled pilot
 
 The script creates a **new** Room map (`data/followup_maps/room-64-64-16-bypass.map`) by opening 24 blocked cells which have free neighbors on opposite sides. The original map stays unchanged. The SAME generated robot starts, task file, delay seed, and fixed planner are used for each original-vs-bypass comparison.
 
