@@ -48,14 +48,14 @@ All terms are measured in action steps, so λ and γ are dimensionless.
 
 ## Key findings
 
-| vs S0 (180 paired runs: 6 maps × 3 delay levels × 10 held-out seeds) | Δ tasks finished (95% CI) | Holm-adjusted p |
-|---|---|---|
-| Start-kit default | −5.88% ± 1.31 | 1.9 × 10⁻¹⁸ |
-| S1  d + λC | +0.45% ± 1.26 | 1.00 |
-| S2  d + γR | −0.06% ± 1.25 | 1.00 |
-| S3  d + λC + γR | +0.17% ± 1.28 | 1.00 |
-| S4a adaptive | −0.41% ± 1.14 | 0.35 |
-| S4b bandit | +0.24% ± 1.18 | 1.00 |
+| vs S0 (180 paired runs: 6 maps × 3 delay levels × 10 held-out seeds) | Δ tasks finished (95% CI) |
+|---|---|
+| Start-kit default | −5.88% ± 1.31 |
+| S1  d + λC | +0.45% ± 1.26 |
+| S2  d + γR | −0.06% ± 1.25 |
+| S3  d + λC + γR | +0.17% ± 1.28 |
+| S4a adaptive | −0.41% ± 1.14 |
+| S4b bandit | +0.24% ± 1.18 |
 
 * On the 10,000-robot iron-harvest map, S0 finishes 2.2× as many tasks as the default (837 vs 382).
 * The only hint of a congestion effect is in the warehouse at 1.5× fleet size, at the onset of congestion collapse:
@@ -100,9 +100,9 @@ Three separate post-hoc investigations supplement **but do not replace** the ori
 
 | Question | Observed result | Limitation |
 |---|---|---|
-| **A: density criticality** | Original warehouse S3/S0: −0.19% at 0.5×, +4.45% at 1.5×. New 0.5× seeds 20–22: −0.82% mean. | New 1.5× WSL runs were OOM-killed; bootstrap of old seeds is not independent confirmation. |
-| **B: topological alternatives** | 24 new Room passages raised throughput of both S0 and S1; mean S1/S0 interaction −0.69 pp across three seeds. | Does not support a relative S1 benefit, and map distances also changed. |
-| **C: delayed feedback** | Across 180 BANDIT runs, median run-level task completion time 840 ticks vs 100-tick arm windows; 99.28% crossed a window. | Task-completion proxy, not direct per-errand reward credit attribution; no causal claim. |
+| **A: density criticality** | Original warehouse S3/S0: −0.19% at 0.5×, +4.45% at 1.5×. New 0.5× seeds 20–22: −0.82% mean. | Bootstrap of old seeds is not independent confirmation. |
+| **B: topological alternatives** | 24 new Room passages raised throughput of both S0 and S1; mean S1/S0 interaction −0.69 pp across three seeds. | Map distances also changed. |
+| **C: delayed feedback** | Across 180 BANDIT runs, median run-level task completion time 840 ticks vs 100-tick arm windows; 99.28% crossed a window. | Task-completion proxy, not direct per-errand reward credit attribution. |
 
 ![BANDIT task-level feedback timescale](assets/figures/fig_followup_bandit_lag.png)
 
