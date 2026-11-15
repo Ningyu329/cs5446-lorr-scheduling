@@ -134,7 +134,12 @@ def make_instance(domain, mult, delay, seed, out_root=GEN):
     maps_link = os.path.join(ddir, "maps")
     if not os.path.exists(maps_link):
         src = os.path.join(BASE, os.path.dirname(DOMAINS[domain]), "maps")
-        os.symlink(os.path.relpath(src, ddir), maps_link)
+        try:
+            os.symlink(os.path.relpath(src, ddir), maps_link)
+        except FileExistsError:
+            # Another test/worker can create the same link after the check.
+            if os.path.realpath(maps_link) != os.path.realpath(src) or not os.path.isdir(maps_link):
+                raise
 
     stem = f"{domain}-m{mult:g}-s{seed}"
     afile = os.path.join(ddir, "agents", stem + ".agents")

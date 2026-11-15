@@ -110,6 +110,7 @@ def main():
     print(json.dumps({k: v for k, v in man.items() if k != "failed"}, indent=1))
     if failed:
         print("FAILED:", *failed[:20], sep="\n  ")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
