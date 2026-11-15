@@ -11,8 +11,9 @@ S = d + λC + γR        d = distance,  C = congestion exposure,  R = delay risk
 
 and evaluated it, together with two adaptive extensions, in 2,326 full simulations.
 **Main result:** the *matching rule* matters far more than the extra score terms.
-A global greedy matcher on distance alone finishes **5.9% ± 1.3% more tasks** than the start-kit default
-(156 of 180 paired wins), while adding congestion and delay terms changes throughput by only −0.4% to +0.5%, which is not significant.
+Relative to our distance-only global greedy matcher (S0), the start-kit default finishes
+**5.9% ± 1.3% fewer tasks** (S0 wins 156 of 180 paired runs), while adding congestion and delay terms
+changes throughput by only −0.4% to +0.5%, which is not significant.
 
 ---
 
@@ -67,17 +68,14 @@ All terms are measured in action steps, so λ and γ are dimensionless.
 
 ## Requirements
 
-* Linux or macOS, a C++17 compiler, CMake ≥ 3.16, Boost (program_options, system, filesystem, log), pybind11
-* Python ≥ 3.9 (running experiments needs only the standard library)
+* Linux or macOS, Git, a C++17 compiler, CMake ≥ 3.16, Boost (program_options, system, filesystem, log, log_setup), pybind11
+* Python ≥ 3.9 with development headers/libraries (the simulator embeds Python; experiment scripts use only the standard library)
 
 ```bash
 # Ubuntu / Debian
-sudo apt install build-essential cmake libboost-all-dev pybind11-dev python3 python3-pip
+sudo apt install git build-essential cmake libboost-all-dev python3-dev python3-venv python3-pip
 # macOS (Homebrew)
-brew install cmake boost pybind11
-
-# optional: analysis/figures, tests, Ray cluster sweeps
-pip install -r requirements.txt
+brew install cmake boost python
 ```
 
 ## Quick start (about 5 minutes)
@@ -86,10 +84,23 @@ pip install -r requirements.txt
 git clone https://github.com/Ningyu329/cs5446-lorr-scheduling.git
 cd cs5446-lorr-scheduling
 
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install pybind11 pytest
+
 scripts/build_startkit.sh          # clones the official start-kit (pinned commit), installs our scheduler, builds ./lifelong (~1 min)
 python3 scripts/ray_sweep.py experiments/configs/quick.json --local 3   # 6 runs, ~3 min with 3 parallel workers
-python3 scripts/quick_summary.py   # paired comparison table
+python3 scripts/quick_summary.py --config experiments/configs/quick.json
 ```
+
+The first build downloads the official simulator and its example maps, so it needs Internet access.
+No separate Google Drive dataset or previous experiment results are required. Generated inputs go to
+`data/generated/` and outputs to `results/runs/quick/`; both are ignored by Git.
+The summary checks that **all six configured runs** have both a `DONE` marker and a summary.
+An incomplete experiment or simulator errors cause a nonzero exit status.
+
+Use `--local 1` instead of `--local 3` on a machine with fewer than six available CPU cores.
+Build parallelism defaults to two jobs; use `JOBS=4 scripts/build_startkit.sh` to change it.
 
 `quick.json` runs the 400-robot `random` map with the official delays for 1,000 ticks on 2 seeds, comparing
 `DEFAULT`, `S0` and `S3`. Expected output (counts vary slightly between machines, because the planner is wall-clock bounded):
@@ -109,8 +120,10 @@ Mean paired change in tasks finished vs S0
 6 runs, planner/schedule errors + timeouts: 0
 ```
 
-DEFAULT should come out clearly below S0 (finding 1), and S3 should be within a few percent of S0 (finding 2).
-Two seeds are far too few for inference: the full study uses 10 held-out seeds per cell.
+This is a **smoke test**, not a performance acceptance threshold. Check that all six runs finish,
+the table has DEFAULT/S0/S3 for both seeds, and planner/schedule errors + entry timeouts are zero.
+Counts and rankings can differ on another machine: the planner has a wall-clock budget.
+Two seeds are far too few for inference; the full study uses 10 held-out seeds per cell.
 
 **A single run** (any map, scheduler and weights):
 
@@ -121,11 +134,34 @@ python3 scripts/lorr_job.py --domain maze --delay base --sched S3 --lam 2 --gam 
 Maps: `maze` (40 robots), `room` (150), `random` (400), `city` (600), `warehouse` (2,500), `game` (1,800), `iron` (10,000).
 Delay levels: `none`, `base` (official configuration), `high` (8× delay load, capped).
 
-**Tests** (35 tests, ~40 s; the scheduler integration tests run the real binary):
+**Tests** (43 tests; the scheduler integration tests run the real binary and typically take at least 40 s):
 
 ```bash
 python3 -m pytest tests/
 ```
+
+Build first: the 16 C++ integration checks are skipped when `lifelong` is absent.
+The other tests cover the Python prototype and quick-start failure handling.
+For analysis/figures or Ray cluster sweeps, install the optional dependencies inside the same virtual environment:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+**Troubleshooting**
+
+* Compiler or dependency errors: the full diagnostics are in `third_party/Start-Kit/cmake.log`
+  and `third_party/Start-Kit/build.log`. A failed build stops the script even if an older binary exists.
+* Multiple Python installations: activate the virtual environment first, or set
+  `PYTHON=/absolute/path/to/python scripts/build_startkit.sh`. Additional CMake options can be passed
+  after the script name; for a nonstandard Boost installation, set `CMAKE_PREFIX_PATH` to its prefix.
+* Interrupted sweep: rerun the same sweep command. Completed jobs are skipped; failed jobs are retried.
+  Run the summary with `--config` after the sweep to check completeness.
+* A different Start-Kit checkout is already present: the build script requires commit
+  `9bc75d9dd9883de049294ab2981bf325bbe19d49` and stops rather than overwriting another version.
+
+See [the quick-start validation record](docs/quick-start-validation.md) for a tested environment,
+commands, and observed output. It validates the small demo rather than the full study.
 
 ## Full reproduction
 
