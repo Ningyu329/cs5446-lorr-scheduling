@@ -94,7 +94,7 @@ signals can have limited additional predictive and decision value.
 Additional figures and source numeric tables: [`assets/figures/`](assets/figures/),
 [`published_results/tables/`](published_results/tables/).
 
-## Exploratory follow-up (15 November 2026)
+## Exploratory follow-up
 
 Three separate post-hoc investigations supplement **but do not replace** the original main results:
 
