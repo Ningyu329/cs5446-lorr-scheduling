@@ -1,0 +1,5 @@
+domain,low_0.5x,high_1.5x,interaction_pp
+room,-0.03,0.01,0.04
+city,-0.17,3.20,3.37
+warehouse,-0.19,4.45,4.64
+game,-0.22,5.51,5.73
