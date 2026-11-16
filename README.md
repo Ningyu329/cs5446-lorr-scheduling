@@ -92,6 +92,8 @@ multiple-comparison correction.
 
 ![Density sensitivity (original runs)](assets/figures/fig_density.png)
 
+![Warehouse density response](assets/figures/fig_warehouse_density_focus.png)
+
 **Cross-domain density dependence — exploratory follow-up.**
 
 To investigate whether the Warehouse density effect generalizes,
