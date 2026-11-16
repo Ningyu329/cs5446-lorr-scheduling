@@ -108,6 +108,7 @@ four official map domains.
 | Game | −0.22% | +5.51% | +5.73 pp |
 
 ![Cross-domain density dependence](assets/figures/fig_density_domain_focus.png)
+Numerical data: [Cross-domain density results](published_results/followup/density_cross_domain.csv).
 
 The results suggest that congestion-aware scoring may be more
 valuable in larger, structurally richer maps under heavy traffic,
