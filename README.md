@@ -13,7 +13,9 @@ and evaluated it, together with two adaptive extensions, in 2,326 full simulatio
 **Main result:** the *matching rule* matters far more than the extra score terms.
 Relative to our distance-only global greedy matcher (S0), the start-kit default finishes
 **5.9% ± 1.3% fewer tasks** (S0 wins 156 of 180 paired runs), while adding congestion and delay terms
-changes throughput by only −0.4% to +0.5%, which is not significant.
+changes throughput by only −0.4% to +0.5%, which is not significant. Congestion-aware scheduling shows 
+greater benefits at **higher fleet densities** in **larger**, **more complex** maps, while offering little 
+improvement in simpler environments.
 
 ---
 
