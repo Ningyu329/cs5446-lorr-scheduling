@@ -58,8 +58,16 @@ All terms are measured in action steps, so λ and γ are dimensionless.
 | S4b bandit | +0.24% ± 1.18 |
 
 * On the 10,000-robot iron-harvest map, S0 finishes 2.2× as many tasks as the default (837 vs 382).
-* The only hint of a congestion effect is in the warehouse at 1.5× fleet size, at the onset of congestion collapse:
-  +4.4% ± 2.6% (p = 0.004), which is not significant after Holm correction.
+
+* **Density-dependent benefits of congestion-aware scoring.** While S3
+  provides no significant pooled improvement over S0, its relative
+  benefit increases markedly with fleet density in several larger,
+  structurally richer maps. At 1.5× density, S3 improves throughput
+  by +3.20% in City, +4.45% in Warehouse, and +5.51% in Game,
+  compared with approximately zero in Room (+0.01%).
+  These cross-domain findings are exploratory; the original
+  Warehouse 1.5× result did not survive Holm correction.
+
 * Why the terms do not help: LoRR delay onsets are i.i.d. over robots and ticks, so delay history does not predict future delays;
   and waiting concentrates at junctions that every route must cross. Given d, the C and R terms add at most 0.018 to the
   R² of a completion-time model.
@@ -84,6 +92,31 @@ multiple-comparison correction.
 
 ![Density sensitivity (original runs)](assets/figures/fig_density.png)
 
+**Cross-domain density dependence — exploratory follow-up.**
+
+To investigate whether the Warehouse density effect generalizes,
+we compared S3 against S0 at 0.5× and 1.5× fleet sizes across
+four official map domains.
+
+| Domain | 0.5× | 1.5× | Density interaction |
+|---|---:|---:|---:|
+| Room | −0.03% | +0.01% | +0.04 pp |
+| City | −0.17% | +3.20% | +3.37 pp |
+| Warehouse | −0.19% | +4.45% | +4.64 pp |
+| Game | −0.22% | +5.51% | +5.73 pp |
+
+![Cross-domain density dependence](assets/figures/fig_density_domain_focus.png)
+
+The results suggest that congestion-aware scoring may be more
+valuable in larger, structurally richer maps under heavy traffic,
+where bottlenecks and alternative task assignments interact.
+However, this is an exploratory cross-domain pattern rather than
+a demonstrated causal relationship. The Warehouse result has the
+most complete paired-seed analysis in the original study.
+
+Detailed numerical summaries:
+[`density_cross_domain.csv`](published_results/followup/density_cross_domain.csv).
+
 **Mechanism diagnostics.** The feature-validity and waiting heatmaps explain how congestion
 signals can have limited additional predictive and decision value.
 
@@ -100,7 +133,7 @@ Three separate post-hoc investigations supplement:
 
 | Question | Observed result | Limitation |
 |---|---|---|
-| **A: density criticality** | Original warehouse S3/S0: −0.19% at 0.5×, +4.45% at 1.5×. New 0.5× seeds 20–22: −0.82% mean. | Bootstrap of old seeds is not independent confirmation. |
+| **A: density criticality** | S3/S0 gains at 1.5× density: Room +0.01%, City +3.20%, Warehouse +4.45%, Game +5.51%. Larger, richer maps show stronger exploratory density interactions. | Bootstrap of old seeds is not independent confirmation. |
 | **B: topological alternatives** | 24 new Room passages raised throughput of both S0 and S1; mean S1/S0 interaction −0.69 pp across three seeds. | Map distances also changed. |
 | **C: delayed feedback** | Across 180 BANDIT runs, median run-level task completion time 840 ticks vs 100-tick arm windows; 99.28% crossed a window. | Task-completion proxy, not direct per-errand reward credit attribution. |
 
